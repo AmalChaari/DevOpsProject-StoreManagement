@@ -28,7 +28,6 @@ public class MedicamentMapper {
         Medicament medicament = new Medicament ();
         medicament.setId (medicamentDto.getId ());
         medicament.setDosage (medicamentDto.getDosage ());
-        //TODO:Verify if Category Exists or no
         CategoryDto categoryDto=new CategoryDto (medicamentDto.getCategoryId (),medicamentDto.getCategoryName ());
         medicament.setCategory (CategoryMapper.categoryDtoToCategory (categoryDto));
         medicament.setExpiredDate (medicamentDto.getExpiredDate ());

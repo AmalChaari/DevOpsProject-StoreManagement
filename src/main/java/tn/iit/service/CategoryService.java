@@ -1,6 +1,5 @@
 package tn.iit.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.iit.dao.CategoryDao;
 import tn.iit.dto.CategoryDto;
