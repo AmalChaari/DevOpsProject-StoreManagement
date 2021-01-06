@@ -1,5 +1,7 @@
 package tn.iit.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ import java.util.List;
 public class MedicamentController {
 
     private final MedicamentService medicamentService;
+    private final Logger logger = LoggerFactory.getLogger (MedicamentController.class);
+
 
     public MedicamentController(MedicamentService medicamentService) {
         this.medicamentService = medicamentService;
@@ -23,6 +27,7 @@ public class MedicamentController {
 
     @GetMapping("/{id}")
     public MedicamentDto findOne(@PathVariable("id") long id) {
+        this.logger.debug ("Get Medicament {}", id);
         return this.medicamentService.findOne (id);
     }
 
@@ -32,26 +37,31 @@ public class MedicamentController {
             @RequestParam(defaultValue = "3") int pageSize,
             @RequestParam(defaultValue = "id") String pageSort
     ) {
+        this.logger.debug ("Get all medicaments");
         return this.medicamentService.findAll (PageRequest.of(pageNo,pageSize, Sort.by (pageSort).ascending ()));
     }
 
     @PostMapping
     public MedicamentDto add(@Valid @RequestBody MedicamentDto medicamentDto) {
+        this.logger.debug ("Add new Medicament {}", medicamentDto);
         return this.medicamentService.save (medicamentDto);
     }
 
     @PostMapping("/searches")
     public Collection<MedicamentDto> searches(@Valid @RequestBody List<Long> ids){
+        this.logger.debug ("Get all medicaments with ids {}",ids);
         return this.medicamentService.findAllByIds(ids);
     }
 
     @PutMapping()
     public MedicamentDto update(@Valid @RequestBody MedicamentDto medicamentDto) {
+        this.logger.debug ("Update Medicament {}", medicamentDto.getId ());
         return this.medicamentService.save (medicamentDto);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") long id) {
+        this.logger.debug ("Delete Medicament {}", id);
         this.medicamentService.deleteById (id);
     }
 }
