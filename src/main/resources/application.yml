@@ -1,7 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/store-management?serverTimezone=UTC
+    url: jdbc:mysql://storemanagementmysql:3306/storemanagement?serverTimezone=UTC
     username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -13,3 +14,6 @@ server:
   port: 8085
   servlet:
     context-path: /store-management
+logging:
+  file:
+    name: /store-management/store-management.log
